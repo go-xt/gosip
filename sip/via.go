@@ -55,8 +55,10 @@ func (via *Via) Append(b *bytes.Buffer) {
 	}
 	b.WriteString(via.Host)
 	if via.Port != 5060 {
-		b.WriteString(":")
-		b.WriteString(strconv.Itoa(int(via.Port)))
+		if via.Port != 0 {
+			b.WriteString(":")
+			b.WriteString(strconv.Itoa(int(via.Port)))
+		}
 	}
 	via.Param.Append(b)
 }
