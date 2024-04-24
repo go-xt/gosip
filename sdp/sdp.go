@@ -95,6 +95,7 @@ type SDP struct {
 	RecvOnly bool        // True if 'a=recvonly' was specified in SDP
 	Attrs    [][2]string // a= lines we don't recognize
 	Other    [][2]string // Other description
+	Application *Media      // Non-nil if we can establish audio
 }
 
 // Easy way to create a basic, everyday SDP for VoIP.
