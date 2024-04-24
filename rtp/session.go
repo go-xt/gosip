@@ -24,8 +24,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jart/gosip/dsp"
-	"github.com/jart/gosip/sdp"
+	"github.com/go-xt/gosip/dsp"
+	"github.com/go-xt/gosip/sdp"
 )
 
 const (
@@ -195,13 +195,13 @@ func receiver(sock *net.UDPConn, c chan<- *Frame, e chan<- error, r <-chan *Fram
 			e <- err
 			break
 		}
-		// TODO(jart): Verify source address?
-		// TODO(jart): Packet reordering? Drop duplicate packets?
-		// TODO(jart): DTMF?
+		// TODO(go-xt): Verify source address?
+		// TODO(go-xt): Packet reordering? Drop duplicate packets?
+		// TODO(go-xt): DTMF?
 		var phdr Header
 		err = phdr.Read(buf)
 		if err != nil {
-			// TODO(jart): Best logging strategy?
+			// TODO(go-xt): Best logging strategy?
 			continue
 		}
 		if phdr.PT != sdp.ULAWCodec.PT {

@@ -49,7 +49,7 @@ var (
 	// rather has moved beyond the "calling" state and doesn't go back.
 	GiveupTimeout = 3 * time.Second
 
-	// TODO(jart): How long to wait before refreshing a call with a re-INVITE
+	// TODO(go-xt): How long to wait before refreshing a call with a re-INVITE
 	//             message.
 	RefreshTimeout = 15 * time.Minute
 

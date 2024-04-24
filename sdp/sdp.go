@@ -74,7 +74,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jart/gosip/util"
+	"github.com/go-xt/gosip/util"
 )
 
 const (

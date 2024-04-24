@@ -18,7 +18,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/jart/gosip/sip"
+	"github.com/go-xt/gosip/sip"
 )
 
 const (
@@ -391,7 +391,7 @@ var msgTests = []msgTest{
 
 	{
 		name: "Addr Tag Quoted",
-		// TODO(jart): Crash when extra spacing in here.
+		// TODO(go-xt): Crash when extra spacing in here.
 		s: "SIP/2.0 200 OK\r\n" +
 			"From: <sip:lol.com>;tag=\"◕◡◕\"\r\n" +
 			"\r\n",
@@ -447,7 +447,7 @@ var msgTests = []msgTest{
 		},
 	},
 
-	// // TODO(jart): Implement me.
+	// // TODO(go-xt): Implement me.
 	// {
 	// 	name: "Content Type Params",
 	// 	s: "SIP/2.0 200 OK\r\n" +

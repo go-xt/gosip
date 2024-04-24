@@ -19,7 +19,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/jart/gosip/sip"
+	"github.com/go-xt/gosip/sip"
 )
 
 type uriTest struct {
@@ -64,39 +64,39 @@ var uriTests = []uriTest{
 	},
 
 	{
-		s: "sips:jart@google.com",
+		s: "sips:go-xt@google.com",
 		uri: &sip.URI{
 			Scheme: "sips",
-			User:   "jart",
+			User:   "go-xt",
 			Host:   "google.com",
 		},
 	},
 
 	{
-		s: "sips:jart@google.com:5060",
+		s: "sips:go-xt@google.com:5060",
 		uri: &sip.URI{
 			Scheme: "sips",
-			User:   "jart",
+			User:   "go-xt",
 			Host:   "google.com",
 			Port:   5060,
 		},
 	},
 
 	{
-		s: "sips:jart:letmein@google.com",
+		s: "sips:go-xt:letmein@google.com",
 		uri: &sip.URI{
 			Scheme: "sips",
-			User:   "jart",
+			User:   "go-xt",
 			Pass:   "letmein",
 			Host:   "google.com",
 		},
 	},
 
 	{
-		s: "sips:jart:LetMeIn@google.com:5060",
+		s: "sips:go-xt:LetMeIn@google.com:5060",
 		uri: &sip.URI{
 			Scheme: "sips",
-			User:   "jart",
+			User:   "go-xt",
 			Pass:   "LetMeIn",
 			Host:   "google.com",
 			Port:   5060,
@@ -205,7 +205,7 @@ var uriTests = []uriTest{
 			User:   "alice;day=tuesday",
 			Host:   "atlanta.com",
 		},
-		skipFormat: true, // TODO(jart): Fix this.
+		skipFormat: true, // TODO(go-xt): Fix this.
 	},
 }
 

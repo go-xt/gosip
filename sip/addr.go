@@ -16,14 +16,14 @@
 //
 // For example:
 //
-//   "Justine Tunney" <sip:jart@example.test;isup-oli=29>;tag=feedabee
+//   "Justine Tunney" <sip:go-xt@example.test;isup-oli=29>;tag=feedabee
 //
 // Roughly equates to:
 //
 //   {Display: "Justine Tunney",
 //    Params: {"tag": "feedabee"},
 //    Uri: {Scheme: "sip",
-//          User: "jart",
+//          User: "go-xt",
 //          Pass: "",
 //          Host: "example.test",
 //          Port: "",
@@ -35,7 +35,7 @@ package sip
 import (
 	"bytes"
 
-	"github.com/jart/gosip/util"
+	"github.com/go-xt/gosip/util"
 )
 
 // Represents a SIP Address Linked List

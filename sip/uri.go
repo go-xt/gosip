@@ -20,12 +20,12 @@
 //
 // For example:
 //
-//   jart@example.test;isup-oli=29
+//   go-xt@example.test;isup-oli=29
 //
 // Roughly equates to:
 //
 //   {Scheme: "sip",
-//    User: "jart",
+//    User: "go-xt",
 //    Pass: "",
 //    Host: "example.test",
 //    Port: "",
@@ -37,7 +37,7 @@ package sip
 import (
 	"bytes"
 
-	"github.com/jart/gosip/util"
+	"github.com/go-xt/gosip/util"
 )
 
 const (
@@ -68,7 +68,7 @@ func (uri *URI) Copy() *URI {
 	return res
 }
 
-// TODO(jart): URI Comparison https://tools.ietf.org/html/rfc3261#section-19.1.4
+// TODO(go-xt): URI Comparison https://tools.ietf.org/html/rfc3261#section-19.1.4
 
 func (uri *URI) String() string {
 	var b bytes.Buffer

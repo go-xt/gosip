@@ -19,7 +19,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/jart/gosip/sip"
+	"github.com/go-xt/gosip/sip"
 )
 
 type addrTest struct {
@@ -175,12 +175,12 @@ var addrTests = []addrTest{
 
 	{
 		s: "\"\\\"\\\"Justine \\\\Tunney \" " +
-			"<sip:jart@google.com;isup-oli=29>;tag=deadbeef",
+			"<sip:go-xt@google.com;isup-oli=29>;tag=deadbeef",
 		addr: sip.Addr{
 			Display: "\"\"Justine \\Tunney ",
 			Uri: &sip.URI{
 				Scheme: "sip",
-				User:   "jart",
+				User:   "go-xt",
 				Host:   "google.com",
 				Param:  &sip.URIParam{Name: "isup-oli", Value: "29"},
 			},
@@ -209,7 +209,7 @@ func TestParseAddrBytes(t *testing.T) {
 				t.Error(err)
 				continue
 			} else { // Test was supposed to fail.
-				t.Fatal("TODO(jart): Implement failing support.")
+				t.Fatal("TODO(go-xt): Implement failing support.")
 			}
 		}
 		if !reflect.DeepEqual(&test.addr, addr) {

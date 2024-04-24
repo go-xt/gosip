@@ -118,7 +118,7 @@ func (s *AWGN) ran1() (res float64) {
 	return
 }
 
-// TODO(jart): How does FISTP work in Plan9 assembly?
+// TODO(go-xt): How does FISTP work in Plan9 assembly?
 func fsaturate(damp float64) int16 {
 	if damp > float64(math.MaxInt16) {
 		return math.MaxInt16

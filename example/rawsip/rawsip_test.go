@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jart/gosip/util"
+	"github.com/go-xt/gosip/util"
 )
 
 // An 'OPTIONS' message is used to:
