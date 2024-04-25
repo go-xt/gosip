@@ -274,13 +274,13 @@ func Parse(s string) (sdp *SDP, err error) {
 		sdp.Video = nil
 	}
 	fmt.Println("=================== appinfo:",appinfo)
+	newApp := new(AppMedia)
 	if appinfo != "" {
-		sdp.Application = new(AppMedia)
-		sdp.Application.Port, sdp.Application.Proto, pts, err = parseMediaInfo(appinfo)
+		newApp.Port, newApp.Proto, pts, err = parseMediaInfo(appinfo)
 		if err != nil {
 			return nil, err
 		}
-		sdp.Application.Codecs = "1"
+		newApp.Codecs = "1"
 		//fmt.Println(sdp.Application, pts, rtpmaps, fmtps)
 		//err = populateCodecs(sdp.Application, pts, rtpmaps, fmtps)
 		//if err != nil {
@@ -289,7 +289,11 @@ func Parse(s string) (sdp *SDP, err error) {
 	} else {
 		sdp.Application = nil
 	}
-	fmt.Println("===================sdp.Application:",sdp.Application)
+	fmt.Println("===================newApp:", newApp)
+	fmt.Println("===================sdp.Application:", sdp.Application)
+	sdp.Application = newApp
+	fmt.Println("===================sdp.Application:", sdp.Application)
+
 
 	if sdp.Audio == nil && sdp.Video == nil {
 		return nil, errors.New("sdp has no audio or video information")
