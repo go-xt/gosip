@@ -136,7 +136,7 @@ func Parse(s string) (sdp *SDP, err error) {
 
 	// We abstract the structure of the media lines so we need a place to store
 	// them before assembling the audio/video data structures.
-	var audioinfo, videoinfo string
+	var audioinfo, videoinfo, appinfo string
 	rtpmaps := make([]string, len(lines))
 	rtpmapcnt := 0
 	fmtps := make([]string, len(lines))
@@ -158,6 +158,8 @@ func Parse(s string) (sdp *SDP, err error) {
 				audioinfo = line[6:]
 			} else if strings.HasPrefix(line, "video ") {
 				videoinfo = line[6:]
+			} else if strings.HasPrefix(line, "application ") {
+				videoinfo = line[12:]
 			} else {
 				log.Println("Unsupported SDP media line:", line)
 			}
