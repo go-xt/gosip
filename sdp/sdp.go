@@ -70,11 +70,11 @@ import (
 	"fmt"
 	"bytes"
 	"errors"
-	"log"
 	"net"
 	"strconv"
 	"strings"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/go-xt/gosip/util"
 )
 
@@ -273,7 +273,7 @@ func Parse(s string) (sdp *SDP, err error) {
 	} else {
 		sdp.Video = nil
 	}
-	fmt.Println("=================== appinfo:",appinfo)
+	log.Println("=================== appinfo:",appinfo)
 	newApp := new(AppMedia)
 	if appinfo != "" {
 		newApp.Port, newApp.Proto, pts, err = parseMediaInfo(appinfo)
@@ -289,17 +289,17 @@ func Parse(s string) (sdp *SDP, err error) {
 	} else {
 		sdp.Application = nil
 	}
-	fmt.Println("===================newApp:", newApp)
-	fmt.Println("===================sdp.Application:", sdp.Application)
+	log.Println("===================newApp:", newApp)
+	log.Println("===================sdp.Application:", sdp.Application)
 	sdp.Application = newApp
-	fmt.Println("===================sdp.Application:", sdp.Application)
+	log.Println("===================sdp.Application:", sdp.Application)
 
 
 	if sdp.Audio == nil && sdp.Video == nil {
 		return nil, errors.New("sdp has no audio or video information")
 	}
 
-	fmt.Println("===================sdp:",sdp)
+	log.Println("===================sdp:",sdp)
 	return sdp, nil
 }
 
