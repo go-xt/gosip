@@ -277,7 +277,7 @@ func Parse(s string) (sdp *SDP, err error) {
 		if err != nil {
 			return nil, err
 		}
-		err = populateCodecs(sdp.Video, pts, rtpmaps, fmtps)
+		err = populateCodecs(sdp.Application, pts, rtpmaps, fmtps)
 		if err != nil {
 			return nil, err
 		}
