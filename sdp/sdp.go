@@ -125,6 +125,9 @@ func Parse(s string) (sdp *SDP, err error) {
 	sdp = new(SDP)
 	sdp.Session = "pokémon"
 	sdp.Time = "0 0"
+	sdp.Application.Port = 9
+	sdp.Application.Proto = "TCP"
+	sdp.Application.Codecs = "1"
 
 	log.Println("===================start sdp:",sdp)
 	// Eat version.
