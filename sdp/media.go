@@ -26,6 +26,11 @@ type Media struct {
 	Port   uint16  // Port number (0 - 2^16-1)
 	Codecs []Codec // Collection of codecs of a specific type.
 }
+type AppMedia struct {
+	Proto  string  // RTP, SRTP, UDP, UDPTL, TCP, TLS, etc. TCP/MRCPV2
+	Port   uint16  // Port number (0 - 2^16-1)
+	Codecs string // Collection of codecs of a specific type. 1
+}
 
 func (media *Media) Append(type_ string, b *bytes.Buffer) {
 	b.WriteString("m=")

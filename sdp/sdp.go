@@ -96,7 +96,7 @@ type SDP struct {
 	RecvOnly bool        // True if 'a=recvonly' was specified in SDP
 	Attrs    [][2]string // a= lines we don't recognize
 	Other    [][2]string // Other description
-	Application *Media      // Non-nil if we can establish audio
+	Application *AppMedia      // Non-nil if we can establish audio
 }
 
 // Easy way to create a basic, everyday SDP for VoIP.
@@ -274,16 +274,17 @@ func Parse(s string) (sdp *SDP, err error) {
 		sdp.Video = nil
 	}
 	if appinfo != "" {
-		sdp.Application = new(Media)
+		sdp.Application = new(AppMedia)
 		sdp.Application.Port, sdp.Application.Proto, pts, err = parseMediaInfo(appinfo)
 		if err != nil {
 			return nil, err
 		}
-		fmt.Println(sdp.Application, pts, rtpmaps, fmtps)
-		err = populateCodecs(sdp.Application, pts, rtpmaps, fmtps)
-		if err != nil {
-			return nil, err
-		}
+		sdp.Application.Codecs = "1"
+		//fmt.Println(sdp.Application, pts, rtpmaps, fmtps)
+		//err = populateCodecs(sdp.Application, pts, rtpmaps, fmtps)
+		//if err != nil {
+		//	return nil, err
+		//}
 	} else {
 		sdp.Application = nil
 	}
