@@ -123,6 +123,7 @@ func Parse(s string) (sdp *SDP, err error) {
 	sdp.Session = "pokémon"
 	sdp.Time = "0 0"
 
+	log.Println("===================start sdp:",sdp)
 	// Eat version.
 	if !strings.HasPrefix(s, "v=0\r\n") {
 		return nil, errors.New("sdp must start with v=0\\r\\n")
@@ -301,7 +302,7 @@ func Parse(s string) (sdp *SDP, err error) {
 		return nil, errors.New("sdp has no audio or video information")
 	}
 
-	log.Println("===================sdp:",sdp)
+	log.Println("===================last sdp:",sdp)
 	return sdp, nil
 }
 
