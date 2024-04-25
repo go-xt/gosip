@@ -244,7 +244,8 @@ func Parse(s string) (sdp *SDP, err error) {
 
 	// Assemble audio/video information.
 	var pts []uint8
-
+	log.Println("=================== audioinfo:",audioinfo)
+	log.Println("=================== sdp.Audio:",sdp.Audio)
 	if audioinfo != "" {
 		sdp.Audio = new(Media)
 		sdp.Audio.Port, sdp.Audio.Proto, pts, err = parseMediaInfo(audioinfo)
@@ -259,6 +260,7 @@ func Parse(s string) (sdp *SDP, err error) {
 	} else {
 		sdp.Video = nil
 	}
+	log.Println("=================== sdp.Audio:",sdp.Audio)
 
 	if videoinfo != "" {
 		sdp.Video = new(Media)
