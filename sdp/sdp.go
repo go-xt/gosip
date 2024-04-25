@@ -114,6 +114,9 @@ func New(addr *net.UDPAddr, codecs ...Codec) *SDP {
 		sdp.Audio.Codecs[i] = codecs[i]
 	}
 	sdp.Attrs = make([][2]string, 0, 8)
+	sdp.Application.Proto = "TCP/MRCPv2"
+	sdp.Application.Codecs = "1"
+	sdp.Application.Port = 0
 	return sdp
 }
 
