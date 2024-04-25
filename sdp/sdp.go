@@ -159,7 +159,7 @@ func Parse(s string) (sdp *SDP, err error) {
 			} else if strings.HasPrefix(line, "video ") {
 				videoinfo = line[6:]
 			} else if strings.HasPrefix(line, "application ") {
-				videoinfo = line[12:]
+				appinfo = line[12:]
 			} else {
 				log.Println("Unsupported SDP media line:", line)
 			}
@@ -270,6 +270,19 @@ func Parse(s string) (sdp *SDP, err error) {
 		}
 	} else {
 		sdp.Video = nil
+	}
+	if appinfo != "" {
+		sdp.Application = new(Media)
+		sdp.Application.Port, sdp.Application.Proto, pts, err = parseMediaInfo(appinfo)
+		if err != nil {
+			return nil, err
+		}
+		err = populateCodecs(sdp.Video, pts, rtpmaps, fmtps)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		sdp.Application = nil
 	}
 
 	if sdp.Audio == nil && sdp.Video == nil {
