@@ -67,6 +67,7 @@
 package sdp
 
 import (
+	"fmt"
 	"bytes"
 	"errors"
 	"log"
@@ -250,6 +251,7 @@ func Parse(s string) (sdp *SDP, err error) {
 		if err != nil {
 			return nil, err
 		}
+		fmt.Println(sdp.Audio, pts, rtpmaps, fmtps)
 		err = populateCodecs(sdp.Audio, pts, rtpmaps, fmtps)
 		if err != nil {
 			return nil, err
@@ -277,6 +279,7 @@ func Parse(s string) (sdp *SDP, err error) {
 		if err != nil {
 			return nil, err
 		}
+		fmt.Println(sdp.Application, pts, rtpmaps, fmtps)
 		err = populateCodecs(sdp.Application, pts, rtpmaps, fmtps)
 		if err != nil {
 			return nil, err
