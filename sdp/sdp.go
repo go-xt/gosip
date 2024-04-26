@@ -89,6 +89,7 @@ type SDP struct {
 	Addr     string      // Connect to this IP; never blank (from c=)
 	Audio    *Media      // Non-nil if we can establish audio
 	Video    *Media      // Non-nil if we can establish video
+	Apps	 string     // mrcpv2 string 9 TCP/MRCPv2 1
 	Application *AppMedia   // Non-nil if we can establish audio
 	Session  string      // s= Session Name (default "-")
 	Time     string      // t= Active Time (default "0 0")
@@ -281,6 +282,7 @@ func Parse(s string) (sdp *SDP, err error) {
 	log.Println("=================== appinfo:",appinfo)
 	newApp := new(AppMedia)
 	if appinfo != "" {
+		sdp.Apps = appinfo
 		newApp.Port, newApp.Proto, pts, err = parseMediaInfo(appinfo)
 		if err != nil {
 			return nil, err
@@ -296,6 +298,7 @@ func Parse(s string) (sdp *SDP, err error) {
 		newApp.Codecs = "1"
 		newApp.Proto = "TCP/MRCPv2"
 		newApp.Port = 9
+		sdp.Apps = "-"
 	}
 	log.Println("===================newApp:", newApp)
 	log.Println("===================sdp.Application:", sdp.Application)
