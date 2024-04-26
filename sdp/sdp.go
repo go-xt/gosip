@@ -297,6 +297,9 @@ func Parse(s string) (sdp *SDP, err error) {
 		//}
 	} else {
 		sdp.Application = nil
+		newApp.Codecs = "1"
+		newApp.Proto = "TCP/MRCPv2"
+		newApp.Port = 9
 	}
 	log.Println("===================newApp:", newApp)
 	log.Println("===================sdp.Application:", sdp.Application)
