@@ -371,6 +371,12 @@ func (sdp *SDP) Append(b *bytes.Buffer) {
 	if sdp.Video != nil {
 		sdp.Video.Append("video", b)
 	}
+	if sdp.Apps != nil {
+		sdp.Apps.Append("applications", b)
+	}
+	if sdp.Application != nil {
+		sdp.Application.Append("application", b)
+	}
 	for _, attr := range sdp.Attrs {
 		if attr[1] == "" {
 			b.WriteString("a=")
