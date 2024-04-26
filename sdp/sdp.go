@@ -372,7 +372,9 @@ func (sdp *SDP) Append(b *bytes.Buffer) {
 		sdp.Video.Append("video", b)
 	}
 	if sdp.Apps != "" {
-		sdp.Apps.Append("applications", b)
+		b.WriteString("m=applications ")
+		b.WriteString(sdp.Apps)
+		b.WriteString("\r\n")
 	}
 	if sdp.Application != nil {
 		sdp.Application.Append("application", b)

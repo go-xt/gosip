@@ -52,3 +52,23 @@ func (media *Media) Append(type_ string, b *bytes.Buffer) {
 		codec.Append(b)
 	}
 }
+
+func (media *AppMedia) Append(type_ string, b *bytes.Buffer) {
+	b.WriteString("m=")
+	b.WriteString(type_)
+	b.WriteString(" ")
+	b.WriteString(strconv.FormatUint(uint64(media.Port), 10))
+	b.WriteString(" ")
+	if media.Proto == "" {
+		b.WriteString("TCP/MRPv2")
+	} else {
+		b.WriteString(media.Proto)
+	}
+	if media.Codecs == "" {
+		b.WriteString(" 1")
+	} else {
+		b.WriteString(" ")
+		b.WriteString(media.Codecs)
+	}
+	b.WriteString("\r\n")
+}
