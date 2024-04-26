@@ -115,8 +115,6 @@ func New(addr *net.UDPAddr, codecs ...Codec) *SDP {
 		sdp.Audio.Codecs[i] = codecs[i]
 	}
 	sdp.Attrs = make([][2]string, 0, 8)
-	sdp.Application.Proto = "TCP/MRCPv2"
-	sdp.Application.Codecs = "1"
 	return sdp
 }
 
@@ -126,7 +124,6 @@ func Parse(s string) (sdp *SDP, err error) {
 	sdp.Session = "pokémon"
 	sdp.Time = "0 0"
 
-	log.Println("===================start sdp:",sdp)
 	// Eat version.
 	if !strings.HasPrefix(s, "v=0\r\n") {
 		return nil, errors.New("sdp must start with v=0\\r\\n")
@@ -248,8 +245,6 @@ func Parse(s string) (sdp *SDP, err error) {
 
 	// Assemble audio/video information.
 	var pts []uint8
-	log.Println("=================== audioinfo:",audioinfo)
-	log.Println("=================== sdp.Audio:",sdp.Audio)
 	if audioinfo != "" {
 		sdp.Audio = new(Media)
 		sdp.Audio.Port, sdp.Audio.Proto, pts, err = parseMediaInfo(audioinfo)
@@ -264,7 +259,6 @@ func Parse(s string) (sdp *SDP, err error) {
 	} else {
 		sdp.Video = nil
 	}
-	log.Println("=================== sdp.Audio:",sdp.Audio)
 
 	if videoinfo != "" {
 		sdp.Video = new(Media)
@@ -279,7 +273,6 @@ func Parse(s string) (sdp *SDP, err error) {
 	} else {
 		sdp.Video = nil
 	}
-	log.Println("=================== appinfo:",appinfo)
 	newApp := new(AppMedia)
 	if appinfo != "" {
 		sdp.Apps = appinfo
@@ -293,24 +286,17 @@ func Parse(s string) (sdp *SDP, err error) {
 		//if err != nil {
 		//	return nil, err
 		//}
+		sdp.Application = newApp
 	} else {
 		sdp.Application = nil
-		newApp.Codecs = "1"
-		newApp.Proto = "TCP/MRCPv2"
-		newApp.Port = 9
 		sdp.Apps = "-"
 	}
-	log.Println("===================newApp:", newApp)
-	log.Println("===================sdp.Application:", sdp.Application)
-	sdp.Application = newApp
-	log.Println("===================sdp.Application:", sdp.Application)
 
 
 	if sdp.Audio == nil && sdp.Video == nil {
 		return nil, errors.New("sdp has no audio or video information")
 	}
 
-	log.Println("===================last sdp:",sdp)
 	return sdp, nil
 }
 
