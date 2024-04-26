@@ -89,6 +89,7 @@ type SDP struct {
 	Addr     string      // Connect to this IP; never blank (from c=)
 	Audio    *Media      // Non-nil if we can establish audio
 	Video    *Media      // Non-nil if we can establish video
+	Application *AppMedia   // Non-nil if we can establish audio
 	Session  string      // s= Session Name (default "-")
 	Time     string      // t= Active Time (default "0 0")
 	Ptime    int         // Transmit frame every N milliseconds (default 20)
@@ -96,7 +97,6 @@ type SDP struct {
 	RecvOnly bool        // True if 'a=recvonly' was specified in SDP
 	Attrs    [][2]string // a= lines we don't recognize
 	Other    [][2]string // Other description
-	Application *AppMedia      // Non-nil if we can establish audio
 }
 
 // Easy way to create a basic, everyday SDP for VoIP.
@@ -116,7 +116,6 @@ func New(addr *net.UDPAddr, codecs ...Codec) *SDP {
 	sdp.Attrs = make([][2]string, 0, 8)
 	sdp.Application.Proto = "TCP/MRCPv2"
 	sdp.Application.Codecs = "1"
-	sdp.Application.Port = 0
 	return sdp
 }
 
@@ -125,9 +124,6 @@ func Parse(s string) (sdp *SDP, err error) {
 	sdp = new(SDP)
 	sdp.Session = "pokémon"
 	sdp.Time = "0 0"
-	sdp.Application.Port = 9
-	sdp.Application.Proto = "TCP"
-	sdp.Application.Codecs = "1"
 
 	log.Println("===================start sdp:",sdp)
 	// Eat version.
