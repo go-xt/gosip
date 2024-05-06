@@ -67,7 +67,6 @@
 package sdp
 
 import (
-	"fmt"
 	"bytes"
 	"errors"
 	"net"
